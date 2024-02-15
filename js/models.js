@@ -75,23 +75,31 @@ class StoryList {
   //let newStory = await storyList.addStory(currentUser,
   // {title: "Test", author: "Me", url: "http://meow.com"});
 
-  async addStory(currentUser, newStory) {
+  async addStory(currentUser, { title, author, url }) {
     // UNIMPLEMENTED: complete this function!
     //fetch the story(post), send response with id title etc to newStory instance
 
-
+    console.log('hello');
     const response = await fetch(
-      `${BASE_URL},
-    {method:'post',
-    body:{
-      token:${currentUser.token},
-      story:{
-        author${newStory.author},
-        title: ${newStory.title},
-        url:${newStory.url}}}`);
-    return new Story(current, newStory);
+      `${BASE_URL}/stories`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          "token": currentUser.loginToken,
+          "story": {
+            "author": author,
+            "title": title,
+            "url": url
+          }
+        })
+      });
 
 
+    let storyData = await response.json();
+    let test = new Story(storyData.story);
+
+
+    return test;
 
   }
 }
