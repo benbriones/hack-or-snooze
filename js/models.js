@@ -78,8 +78,6 @@ class StoryList {
   async addStory(currentUser, { title, author, url }) {
     // UNIMPLEMENTED: complete this function!
     //fetch the story(post), send response with id title etc to newStory instance
-
-    console.log('hello');
     const response = await fetch(
       `${BASE_URL}/stories`,
       {
@@ -96,10 +94,10 @@ class StoryList {
 
 
     let storyData = await response.json();
-    let test = new Story(storyData.story);
+    let story = new Story(storyData.story);
 
 
-    return test;
+    return story;
 
   }
 }

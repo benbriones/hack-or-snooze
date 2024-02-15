@@ -50,3 +50,22 @@ function putStoriesOnPage() {
 
   $allStoriesList.show();
 }
+
+
+/** getStoryDataAndAddToPage: Gets the input values from form, adds that new
+ * story instance, updates the storyList instance, and adds the new storyList
+ * to the page.
+ */
+async function getStoryDataAndAddToPage(evt) {
+  evt.preventDefault();
+  let authorInput = $(".author-input").val();
+  let titleInput = $(".title-input").val();
+  let urlInput = $(".url-input").val();
+  //No http://throws error
+  let storyInputs = { title: titleInput, author: authorInput, url: urlInput };
+  await storyList.addStory(currentUser, storyInputs);
+  storyList = await StoryList.getStories();
+  putStoriesOnPage();
+}
+
+$('#book-submit-form').on('submit', getStoryDataAndAddToPage);

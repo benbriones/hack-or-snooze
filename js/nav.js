@@ -36,3 +36,16 @@ function updateNavOnLogin() {
   $navLogOut.show();
   $navUserProfile.text(`${currentUser.username}`).show();
 }
+
+//TODO submit in navbar button on click
+// Display html for form
+//add onclick that calls getStoryDataAndAddToPage to the submit button
+
+
+
+function submitButtonClick(evt) {
+  evt.preventDefault();
+  $('.add-a-book').show();
+}
+$(".submit").on('click', submitButtonClick);
+
