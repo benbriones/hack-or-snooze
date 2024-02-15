@@ -73,8 +73,11 @@ class StoryList {
    * Returns the new Story instance
    */
 
-  async addStory( /* user, newStory */) {
+  async addStory(user, newStory) {
     // UNIMPLEMENTED: complete this function!
+    return new Story(user, newStory);
+
+
   }
 }
 
