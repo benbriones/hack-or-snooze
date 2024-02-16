@@ -96,7 +96,7 @@ class StoryList {
     let storyData = await response.json();
     let story = new Story(storyData.story);
 
-    this.stories.push(story); // call addstory on specific instance
+    this.stories.push(story);
 
 
     return story;
@@ -152,6 +152,9 @@ class User {
       }
     );
 
+    const responseParsed = response.json();
+    this.favorites = responseParsed.user.favorites;
+
   }
 
   async deleteFavorite(story) {
@@ -163,7 +166,11 @@ class User {
           token: currentUser.loginToken
         })
       }
-    );
+    )
+
+    const responseParsed = response.json(); // refactor?
+    this.favorites = responseParsed.user.favorites;
+
   }
 
 

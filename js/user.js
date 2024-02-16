@@ -115,3 +115,4 @@ function updateUIOnUserLogin() {
   $(".account-forms-container").hide();
   updateNavOnLogin();
 }
+

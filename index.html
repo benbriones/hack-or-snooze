@@ -32,7 +32,8 @@
   <nav>
     <div class="navbar-brand">
       <a class="nav-link" href="#" id="nav-all">Hack or Snooze</a>
-      <a href="nav-link" class="submit-link">Submit</a>
+      <a class="nav-link submit-link" href = "#">Submit</a>
+      <a href="#" class="nav-link favorites-link">Favorites</a>
     </div>
     <div class="nav-right">
       <a class="nav-link" href="#" id="nav-login">login/signup</a>
@@ -54,6 +55,14 @@
       <button type="submit" class="add-book-submit">Submit</button>
     </form>
   </div>
+  <!-- area for stories (all stories, user stories, favorites) -->
+  <div class="favorite-stories-container container" style="display: none;">
+    <ul class = "favorites-list">
+      <!-- favorites will go in here-->
+    </ul>
+  </div>
+
+
   <section class="stories-container container">
 
     <!-- loading message (removed by JS after stories loaded) -->

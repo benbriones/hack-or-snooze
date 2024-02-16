@@ -30,6 +30,7 @@ function generateStoryMarkup(story) {
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
+        <span><button class = 'btn btn-sm btn-light'>Favorite!</button><span>
         <small class="story-hostname">(${hostName})</small>
         <small class="story-author">by ${story.author}</small>
         <small class="story-user">posted by ${story.username}</small>
@@ -75,3 +76,7 @@ async function getStoryDataAndAddToPage(evt) {
 }
 
 $bookForm.on('submit', getStoryDataAndAddToPage); // change to storyForm
+
+
+
+
