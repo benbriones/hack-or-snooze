@@ -1,5 +1,7 @@
 "use strict";
 
+const $bookForm =$('#book-submit-form');
+
 // This is the global list of the stories, an instance of StoryList
 let storyList;
 
@@ -58,14 +60,18 @@ function putStoriesOnPage() {
  */
 async function getStoryDataAndAddToPage(evt) {
   evt.preventDefault();
-  let authorInput = $(".author-input").val();
-  let titleInput = $(".title-input").val();
-  let urlInput = $(".url-input").val();
+  let author = $(".author-input").val();
+  let title = $(".title-input").val();
+  let url = $(".url-input").val();
   //No http://throws error
-  let storyInputs = { title: titleInput, author: authorInput, url: urlInput };
-  await storyList.addStory(currentUser, storyInputs);
-  storyList = await StoryList.getStories();
-  putStoriesOnPage();
+  let storyInputs = { title, author, url };
+
+  let story = await storyList.addStory(currentUser, storyInputs);
+
+  let $storyMarkup = generateStoryMarkup(story);
+  $allStoriesList.prepend($storyMarkup);
+
+  // storyList = await StoryList.getStories();
 }
 
-$('#book-submit-form').on('submit', getStoryDataAndAddToPage);
+$bookForm.on('submit', getStoryDataAndAddToPage); // change to storyForm

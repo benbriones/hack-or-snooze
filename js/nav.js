@@ -43,9 +43,11 @@ function updateNavOnLogin() {
 
 
 
-function submitButtonClick(evt) {
+function navSubmitClick(evt) { // navSubmitClick
   evt.preventDefault();
   $('.add-a-book').show();
 }
-$(".submit").on('click', submitButtonClick);
+
+// remmember to hide all other elemnts and just showt this one
+$(".submit-link").on('click', navSubmitClick);
 

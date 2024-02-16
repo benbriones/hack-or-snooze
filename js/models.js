@@ -24,8 +24,8 @@ class Story {
   /** Parses hostname out of URL and returns it. */
 
   getHostName() {
-    // FIXME: complete this function!
-    return "hostname.com";
+    let newURL = new URL(this.url);
+    return newURL.hostname;
   }
 }
 
@@ -83,11 +83,11 @@ class StoryList {
       {
         method: "POST",
         body: JSON.stringify({
-          "token": currentUser.loginToken,
-          "story": {
-            "author": author,
-            "title": title,
-            "url": url
+          token: currentUser.loginToken,
+          story: {
+            author: author,
+            title: title,
+            url: url
           }
         })
       });
@@ -95,6 +95,8 @@ class StoryList {
 
     let storyData = await response.json();
     let story = new Story(storyData.story);
+
+    this.stories.push(story); // call addstory on specific instance
 
 
     return story;
