@@ -69,7 +69,7 @@ function putStoriesOnPage() {
 function putFavoritesOnPage() {
   for (let story of currentUser.favorites) {
     const $favoriteStory = generateStoryMarkup(story);
-    $('.favorites-list').append($favoriteStory);
+    $favoritesContainer.append($favoriteStory);
   }
 }
 
@@ -106,20 +106,20 @@ $bookForm.on('submit', getStoryDataAndAddToPage); // change to storyForm
 
 async function handleFavoriteClick(evt) {
   evt.preventDefault();
-  let storyID = evt.target.closest('li').id;
+  let storyID = evt.target.closest('li').id; // gets correctID
   const storyInstance = getStoryInstance(storyID);
 
-  if (checkForFovorite(storyID)) {
-    await currentUser.addFavorite(storyInstance);
-  } else {
+  if (checkForFovorite(currentUser.favorites, storyID)) { // if in favorites
     await currentUser.deleteFavorite(storyInstance);
-
+  } else {
+    await currentUser.addFavorite(storyInstance);
   }
 
 }
 
 function getStoryInstance(findID) {
-  return storyList.stories.find(story => story.storyId === findID);
+  return storyList.stories.find(story => story.storyId === findID) ||
+    currentUser.favorites.find(story => story.storyId === findID);
 }
 
 

@@ -13,7 +13,7 @@ const $signupForm = $("#signup-form");
 const $navLogin = $("#nav-login");
 const $navUserProfile = $("#nav-user-profile");
 const $navLogOut = $("#nav-logout");
-const $favoritesContainer = $('.favorite-stories-container');
+const $favoritesContainer = $('#favorites-list');
 
 const $addABook = $('.add-a-book').hide();
 

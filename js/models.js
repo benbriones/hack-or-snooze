@@ -159,6 +159,8 @@ class User {
   }
 
   async deleteFavorite(story) {
+    console.log('story = ', story);
+    console.log('story =', story.storyId)
     const response = await fetch(
       `${BASE_URL}/users/${currentUser.username}/favorites/${story.storyId}`,
       {
