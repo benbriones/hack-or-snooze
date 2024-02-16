@@ -79,17 +79,26 @@ $bookForm.on('submit', getStoryDataAndAddToPage); // change to storyForm
 
 
 
-async function handleFavoriteClick(evt) {
+function handleFavoriteClick(evt) {
   evt.preventDefault();
-  //if button is on -- remove else add
+  console.log('clicked')
+  let storyID = evt.target.closest('li').id;
 
 
 
+  // let storyInstance = getStoryIstance(storyID);
+
+  // addfavorite(storyId)
+
+}
+
+function getStoryInstance(findID) {
+  return storyList.stories.find(story => story.storyId === findID);
 }
 
 
 
-$(".favorite-story-btn").on('click', handleFavoriteClick)
+$(".stories-list").on('click','button', handleFavoriteClick)
 
 
 
