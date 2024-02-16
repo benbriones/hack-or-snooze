@@ -1,6 +1,6 @@
 "use strict";
 
-const $bookForm =$('#book-submit-form');
+const $bookForm = $('#book-submit-form');
 
 // This is the global list of the stories, an instance of StoryList
 let storyList;
@@ -30,7 +30,7 @@ function generateStoryMarkup(story) {
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
-        <span><button class = 'btn btn-sm btn-light'>Favorite!</button><span>
+        <span><button class = 'favorite-story-btn btn btn-sm btn-light'>Favorite!</button><span>
         <small class="story-hostname">(${hostName})</small>
         <small class="story-author">by ${story.author}</small>
         <small class="story-user">posted by ${story.username}</small>
@@ -76,6 +76,20 @@ async function getStoryDataAndAddToPage(evt) {
 }
 
 $bookForm.on('submit', getStoryDataAndAddToPage); // change to storyForm
+
+
+
+async function handleFavoriteClick(evt) {
+  evt.preventDefault();
+  //if button is on -- remove else add
+
+
+
+}
+
+
+
+$(".favorite-story-btn").on('click', handleFavoriteClick)
 
 
 

@@ -51,3 +51,10 @@ function navSubmitClick(evt) { // navSubmitClick
 // remmember to hide all other elemnts and just showt this one
 $(".submit-link").on('click', navSubmitClick);
 
+function navFavoritesClick(evt) {
+  evt.preventDefault();
+  hidePageComponents();
+  $(".favorite-stories-container").show();
+}
+$('.favorites-link').on('click', navFavoritesClick)
+

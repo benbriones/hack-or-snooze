@@ -152,8 +152,8 @@ class User {
       }
     );
 
-    const responseParsed = response.json();
-    this.favorites = responseParsed.user.favorites;
+    // const responseParsed = response.json();
+    this.favorites.push(story);
 
   }
 
@@ -166,7 +166,7 @@ class User {
           token: currentUser.loginToken
         })
       }
-    )
+    );
 
     const responseParsed = response.json(); // refactor?
     this.favorites = responseParsed.user.favorites;
