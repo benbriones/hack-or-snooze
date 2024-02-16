@@ -21,16 +21,28 @@ async function getAndShowStoriesOnStart() {
  * Returns the markup for the story.
  */
 
-function generateStoryMarkup(story) {
-  // console.debug("generateStoryMarkup", story);
 
+function checkForFovorite(favorites, storyID) {
+  for (let fav of favorites) {
+    if (fav.storyId === storyID) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function generateStoryMarkup(story) {
+  console.debug("generateStoryMarkup", story);
+  let iconColor =
+    checkForFovorite(currentUser.favorites, story.storyId) ?
+      "bi-star-fill" : "bi-star";
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
-        <span><button class = 'favorite-story-btn btn btn-sm btn-light'>Favorite!</button><span>
+        <span><i  class = 'bi ${iconColor}'></i><span>
         <small class="story-hostname">(${hostName})</small>
         <small class="story-author">by ${story.author}</small>
         <small class="story-user">posted by ${story.username}</small>
@@ -79,14 +91,17 @@ $bookForm.on('submit', getStoryDataAndAddToPage); // change to storyForm
 
 
 
-function handleFavoriteClick(evt) {
+async function handleFavoriteClick(evt) {
   evt.preventDefault();
-  console.log('clicked')
   let storyID = evt.target.closest('li').id;
+  const storyInstance = getStoryInstance(storyID);
+  //if ogg
+  await currentUser.addFavorite(storyInstance);
+  //add favorites to list ui
 
 
+  // removeFavorite
 
-  // let storyInstance = getStoryIstance(storyID);
 
   // addfavorite(storyId)
 
@@ -98,7 +113,7 @@ function getStoryInstance(findID) {
 
 
 
-$(".stories-list").on('click','button', handleFavoriteClick)
+$(".stories-list").on('click', 'button', handleFavoriteClick)
 
 
 

@@ -153,6 +153,7 @@ class User {
     );
 
     // const responseParsed = response.json();
+
     this.favorites.push(story);
 
   }
