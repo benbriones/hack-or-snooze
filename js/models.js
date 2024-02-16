@@ -141,6 +141,32 @@ class User {
    * - password: a new password
    * - name: the user's full name
    */
+  async addFavorite(story) {
+    const response = await fetch(
+      `${BASE_URL}/users/${currentUser.username}/favorites/${story.storyId}`,
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          token: currentUser.loginToken
+        })
+      }
+    );
+
+  }
+
+  async deleteFavorite(story) {
+    const response = await fetch(
+      `${BASE_URL}/users/${currentUser.username}/favorites/${story.storyId}`,
+      {
+        method: 'DELETE',
+        body: JSON.stringify({
+          token: currentUser.loginToken
+        })
+      }
+    );
+  }
+
+
 
   static async signup(username, password, name) {
     const response = await fetch(`${BASE_URL}/signup`, {
