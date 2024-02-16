@@ -13,6 +13,7 @@ const $signupForm = $("#signup-form");
 const $navLogin = $("#nav-login");
 const $navUserProfile = $("#nav-user-profile");
 const $navLogOut = $("#nav-logout");
+const $favoritesContainer = $('.favorite-stories-container');
 
 const $addABook = $('.add-a-book').hide();
 
@@ -26,6 +27,8 @@ function hidePageComponents() {
     $allStoriesList,
     $loginForm,
     $signupForm,
+    $favoritesContainer,
+    $addABook
   ];
   components.forEach(c => c.hide());
 }

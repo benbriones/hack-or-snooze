@@ -169,7 +169,7 @@ class User {
       }
     );
 
-    const responseParsed = response.json(); // refactor?
+    const responseParsed = await response.json(); // refactor?
     this.favorites = responseParsed.user.favorites;
 
   }

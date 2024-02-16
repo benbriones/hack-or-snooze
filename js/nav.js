@@ -54,7 +54,10 @@ $(".submit-link").on('click', navSubmitClick);
 function navFavoritesClick(evt) {
   evt.preventDefault();
   hidePageComponents();
-  $(".favorite-stories-container").show();
+
+  $favoritesContainer.show();
+
 }
+
 $('.favorites-link').on('click', navFavoritesClick)
 

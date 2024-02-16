@@ -66,6 +66,13 @@ function putStoriesOnPage() {
   $allStoriesList.show();
 }
 
+function putFavoritesOnPage() {
+  for (let story of currentUser.favorites) {
+    const $favoriteStory = generateStoryMarkup(story);
+    $('.favorites-list').append($favoriteStory);
+  }
+}
+
 
 /** getStoryDataAndAddToPage: Gets the input values from form, adds that new
  * story instance, updates the storyList instance, and adds the new storyList
@@ -89,21 +96,25 @@ async function getStoryDataAndAddToPage(evt) {
 
 $bookForm.on('submit', getStoryDataAndAddToPage); // change to storyForm
 
+/*
+1. manipulate favorites dom
+2. do our if else, addfavorite deletefavorite in handlefav
+3. toggle star color
+
+*/
 
 
 async function handleFavoriteClick(evt) {
   evt.preventDefault();
   let storyID = evt.target.closest('li').id;
   const storyInstance = getStoryInstance(storyID);
-  //if ogg
-  await currentUser.addFavorite(storyInstance);
-  //add favorites to list ui
 
+  if (checkForFovorite(storyID)) {
+    await currentUser.addFavorite(storyInstance);
+  } else {
+    await currentUser.deleteFavorite(storyInstance);
 
-  // removeFavorite
-
-
-  // addfavorite(storyId)
+  }
 
 }
 
@@ -113,7 +124,7 @@ function getStoryInstance(findID) {
 
 
 
-$(".stories-list").on('click', 'button', handleFavoriteClick)
+$(".stories-list").on('click', 'i', handleFavoriteClick)
 
 
 
