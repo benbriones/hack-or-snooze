@@ -23,6 +23,7 @@ async function getAndShowStoriesOnStart() {
 
 
 function checkForFovorite(favorites, storyID) {
+  //Todo: Use find() on the array. Add method to user class.
   for (let fav of favorites) {
     if (fav.storyId === storyID) {
       return true;
@@ -50,6 +51,7 @@ function generateStoryMarkup(story) {
     `);
 }
 
+
 /** Gets list of stories from server, generates their HTML, and puts on page. */
 
 function putStoriesOnPage() {
@@ -67,10 +69,12 @@ function putStoriesOnPage() {
 }
 
 function putFavoritesOnPage() {
+  $favoritesContainer.empty();
   for (let story of currentUser.favorites) {
     const $favoriteStory = generateStoryMarkup(story);
     $favoritesContainer.append($favoriteStory);
   }
+  $favoritesContainer.show();
 }
 
 
@@ -80,6 +84,7 @@ function putFavoritesOnPage() {
  */
 async function getStoryDataAndAddToPage(evt) {
   evt.preventDefault();
+  $bookForm.hide();
   let author = $(".author-input").val();
   let title = $(".title-input").val();
   let url = $(".url-input").val();
@@ -93,6 +98,19 @@ async function getStoryDataAndAddToPage(evt) {
 
   // storyList = await StoryList.getStories();
 }
+//
+function addSingleFavorite(favStory) {
+  // if ($favoritesContainer.has(`#${favStory.storyId}`)) {
+  //   console.log("if entered");
+  //   return;
+  // } else {
+  //   console.log('adSingleFav else entered');
+  $favoritesContainer.prepend(generateStoryMarkup(favStory));
+
+
+
+}
+
 
 $bookForm.on('submit', getStoryDataAndAddToPage); // change to storyForm
 
@@ -108,15 +126,19 @@ async function handleFavoriteClick(evt) {
   evt.preventDefault();
   let storyID = evt.target.closest('li').id; // gets correctID
   const storyInstance = getStoryInstance(storyID);
-
+  const $eventTarget = $(evt.target);
+  $eventTarget.toggleClass('bi-star bi-star-fill');
+  //use .hasClass()
   if (checkForFovorite(currentUser.favorites, storyID)) { // if in favorites
     await currentUser.deleteFavorite(storyInstance);
   } else {
     await currentUser.addFavorite(storyInstance);
+    let favToAdd = currentUser.favorites[currentUser.favorites.length - 1];
+    addSingleFavorite(favToAdd);
   }
-
 }
 
+//use method in story class that gets story object from api with story id instead
 function getStoryInstance(findID) {
   return storyList.stories.find(story => story.storyId === findID) ||
     currentUser.favorites.find(story => story.storyId === findID);

@@ -54,6 +54,7 @@ $(".submit-link").on('click', navSubmitClick);
 function navFavoritesClick(evt) {
   evt.preventDefault();
   hidePageComponents();
+  putFavoritesOnPage();
 
   $favoritesContainer.show();
 

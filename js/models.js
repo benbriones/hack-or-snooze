@@ -142,6 +142,7 @@ class User {
    * - name: the user's full name
    */
   async addFavorite(story) {
+    console.log('Entered addFavorite');
     const response = await fetch(
       `${BASE_URL}/users/${currentUser.username}/favorites/${story.storyId}`,
       {
@@ -160,7 +161,7 @@ class User {
 
   async deleteFavorite(story) {
     console.log('story = ', story);
-    console.log('story =', story.storyId)
+    console.log('story =', story.storyId);
     const response = await fetch(
       `${BASE_URL}/users/${currentUser.username}/favorites/${story.storyId}`,
       {
@@ -172,7 +173,7 @@ class User {
     );
 
     const responseParsed = await response.json(); // refactor?
-    this.favorites = responseParsed.user.favorites;
+    this.favorites = this.favorites.filter(s => s.storyId != story.storyId);
 
   }
 
